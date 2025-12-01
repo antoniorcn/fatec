@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="contatoNome"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <input th:id="${elemento.variavel}"
+               type="text"
+               class="input1"
+               th:name="${elemento.variavel}"
+               th:placeholder="${elemento.campoPlaceHolder}"/>
+        <span class="shadow-input1"></span>
+    </div>
+
+    <div th:fragment="contatoEmail"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <input th:id="${elemento.variavel}"
+               type="text"
+               class="input1"
+               th:name="${elemento.variavel}"
+               th:placeholder="${elemento.campoPlaceHolder}"/>
+        <span class="shadow-input1"></span>
+    </div>
+
+    <div th:fragment="inputText"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <input th:id="${elemento.variavel}"
+               type="text"
+               class="input1"
+               th:name="${elemento.variavel}"
+               th:placeholder="${elemento.campoPlaceHolder}"/>
+        <span class="shadow-input1"></span>
+    </div>
+    <div th:fragment="areaText"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <textarea   th:id="${elemento.variavel}"
+                    class="area-input1"
+                    th:name="${elemento.variavel}"
+                    rows="5"
+                    th:placeholder="${elemento.campoPlaceHolder}"></textarea>
+        <span class="shadow-input1"></span>
+    </div>
+
+    <div th:fragment="labelInputText"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'wrap-input1' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <input th:id="${elemento.variavel}"
+               type="text"
+               class="input1"
+               th:name="${elemento.variavel}"
+               th:placeholder="${elemento.campoPlaceHolder}"/>
+        <span class="shadow-input1"></span>
+    </div>
+
+    <div th:fragment="labelInputTextSemNumero"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'wrap-input1' : ''"
+         class="container-contact1">
+        <span class="nao-pergunta" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <input th:id="${elemento.variavel}"
+               type="text"
+               class="input1"
+               th:name="${elemento.variavel}"
+               th:placeholder="${elemento.campoPlaceHolder}"/>
+        <span class="shadow-input1"></span>
+    </div>
+
+    <div th:fragment="labelAreaText"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'wrap-input1' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <textarea   th:id="${elemento.variavel}"
+                    class="area-input1"
+                    th:name="${elemento.variavel}"
+                    rows="5"
+                    th:placeholder="${elemento.campoPlaceHolder}"></textarea>
+        <span class="shadow-input1"></span>
+    </div>
+
+    <div th:fragment="radioYesNo"
+         th:id="${elemento.variavel + '-radio'}"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <label class="radio-container">    Sim
+            <input type="radio" value="sim" th:name="${elemento.variavel}">
+            <span class="radiomark"></span>
+        </label>
+        <label class="radio-container">    Não
+            <input type="radio" value="nao" th:name="${elemento.variavel}">
+            <span class="radiomark"></span>
+        </label>
+    </div>
+
+    <div th:fragment="check"
+         th:id="${elemento.variavel + '-check'}"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p style="margin-bottom: 2rem;" th:text="${elemento.descricao}"></p>
+        <th:block th:each="opcao : ${@languageUtils.getAsStringArray(elemento.opcoes)}">
+            <label class="check-container">
+                [[${opcao}]]
+                <input type="checkbox" class="form-check-input"
+                       th:data1="${elemento.variavel}"
+                       th:onchange="javascript:onCheckChange(this.getAttribute('data1'));"
+                       th:value="${opcao}" th:name="${elemento.variavel}">
+                <span class="checkmark"></span>
+            </label>
+        </th:block>
+        <button type="button" class="btn btn-primary selecao-badge-quantity">
+            Selecionados <span th:id="${elemento.variavel + '-check-quantity'}" class="badge badge-pill badge-light">0</span>
+            <span class="sr-only" th:text="${elemento.titulo + ' selecionados'}"></span>
+        </button>
+    </div>
+
+    <div th:fragment="radio"
+         th:id="${elemento.variavel + '-radio'}"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <th:block th:each="opcao : ${@languageUtils.getAsStringArray(elemento.opcoes)}">
+            <label class="radio-container">     [[${opcao}]]
+                <input type="radio"
+                       th:value="${opcao}"
+                       th:name="${elemento.variavel}">
+                <span class="radiomark"></span>
+            </label>
+        </th:block>
+    </div>
+
+    <div th:fragment="radioLabelValue"
+         th:id="${elemento.variavel + '-radio'}"
+         th:attr="validation=${elemento.validacaoTipo}, data-validate=${elemento.validacaoMensagem}"
+         th:classappend="${elemento.validar} ? 'validate-input' : ''"
+         class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <th:block th:each="opcao : ${@languageUtils.getAsMapFromJSON(elemento.opcoes)}">
+            <label class="radio-container">     [[${opcao.key}]]
+                <input type="radio"
+                       th:value="${opcao.value}"
+                       th:name="${elemento.variavel}">
+                <span class="radiomark"></span>
+            </label>
+        </th:block>
+    </div>
+
+    <div th:fragment="label" class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+    </div>
+
+    <div th:fragment="cardLabel" class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.titulo}">
+        </span>
+        <div th:utext="${elemento.descricao}"></div>
+    </div>
+
+    <div th:fragment="sortItems" class="container-contact1">
+        <span class="contact1-form-title" th:text="${elemento.numeroQuestao} + ' - ' + ${elemento.titulo}">
+        </span>
+        <p th:text="${elemento.descricao}"></p>
+        <ul th:id="${'items_' + elemento.variavel}">
+        </ul>
+        <div id="ordenacao-mensagem" style="display: block">
+            <span class="nao-pergunta">A ordenação somente estará disponível quando forem marcadas 10 desafios ou prioridades.</span>
+        </div>
+        <script th:inline="javascript">
+            elementoComplexo[ [[${elemento.variavel}]] ] = new Sortable.default(
+                document.querySelector( [[${'#items_' + elemento.variavel}]] ), {
+                    draggable: 'li',
+                }
+            )
+            elementoComplexo[ [[${elemento.variavel}]] ].on('sortable:start', () => {
+                console.log('sortable:start');
+            })
+            elementoComplexo[ [[${elemento.variavel}]] ].on('sortable:sort', () => {
+                console.log('sortable:sort');
+            })
+            elementoComplexo[ [[${elemento.variavel}]] ].on('sortable:stop', () => {
+                console.log('sortable:stop');
+                elementoValoresNoFim.push([[${elemento.variavel}]]);
+            })
+            elementoComplexo[ [[${elemento.variavel}]] ].on('sortable:sorted', () => {
+                console.log('sortable:sorted');
+            })
+        </script>
+        <input type="hidden" th:attr="id=${elemento.variavel}, name=${elemento.variavel}" value=""/>
+    </div>
+
+
+    <div th:fragment="teste">
+        <span class="contact1-form-title">
+            Teste de Template
+        </span>
+    </div>
+</html>

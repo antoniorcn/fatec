@@ -1,0 +1,84 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+	<!--===============================================================================================-->
+		<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+
+		<link rel="stylesheet" type="text/css" th:href="@{/css/draggable-custom.css}"/>
+	<!--===============================================================================================-->
+	<!--===============================================================================================-->
+		<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+	<!--===============================================================================================-->
+		<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+		<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<!--===============================================================================================-->
+		<script th:src="@{/vendor/select2/select2.min.js}"></script>
+		<script th:src="@{/js/cep.js}"></script>
+	<!--===============================================================================================-->
+		<script th:src="@{/vendor/tilt/tilt.jquery.min.js}"></script>
+
+		<script>
+			const elementoComplexo = {};
+			const elementoValoresNoFim = [];
+			const camposReprovados = [];
+			let indexQuestions = 0;
+		</script>
+
+		<!-- Entire bundle -->
+		<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.bundle.js"></script>
+		<!-- legacy bundle for older browsers (IE11) -->
+		<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.bundle.legacy.js"></script>
+		<!-- Draggable only -->
+		<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.js"></script>
+		<!-- Sortable only -->
+		<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/sortable.js"></script>
+		<!-- Droppable only -->
+		<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/droppable.js"></script>
+		<!-- Swappable only -->
+		<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/swappable.js"></script>
+		<!-- Plugins only -->
+		<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/plugins.js"></script>
+	</head>
+
+	<body class="contact1">
+		<div class="container">
+			<form th:action="@{'/questionario/' + ${questionarioNome}}" th:method="post" th:object="${questionario}" class="validate-form">
+				<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('${questionario.*}')}">
+					<strong th:value="mensagem"></strong>
+					<a href="javascript: window.history.go(-1);">clique aqui para retornar a página com os dados do questionário</a>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div th:each="secao : ${questionario.secoes}" class="secao">
+					<th:block th:each="elemento : ${secao.elementos}">
+						<div th:replace="~{Elements :: ${elemento.tipo}}"/>
+					</th:block>
+				</div>
+				<div class="secao">
+						<button id="submit-button" type="submit" name="txtButton" value="submeter" class="contact1-form-btn" aria-hidden="true">Enviar Questionário</button>
+				</div>
+			</form>
+		</div>
+
+	<!--===============================================================================================-->
+	<script th:src="@{/js/main.js}"></script>
+	</body>
+</html>

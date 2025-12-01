@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "blank",
+    "slug": "blank",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "plugins": [
+      "react-native-ble-plx"
+    ],
+    "android": {
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT"
+      ],
+      "package": "com.antoniorcn.blank"
+    }
+  }
+}

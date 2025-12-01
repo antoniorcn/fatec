@@ -1,0 +1,19 @@
+{
+  "lema": "Fazer diferente",
+  "titulo": "Águia (Idealista)",
+  "descricao": [
+    "As pessoas com esse perfil comportamental são altamente criativas, gostam de inovações e de novas experiências.",
+    "As águias preferem locais que ofereçam lierdade para que as ideias possam ser colocadas em prática",
+    "Normalmente elas customizam seus ambientes e roupas, dando vazão à sua alta capacidade de criar.",
+    "Relacionamentos muito rígidos, que não permitem que as águias deem asas à sua imaginação podem gerar afastamento.",
+    "Quando duas idéias não são postas em prática a águia tende a ficar ressentida e procura outros lugares.",
+    "Essas pessoas são idealistas, intuitivas, gostam de olhar para o futuro, valorizam flexibilidade e a liberdade."],
+  "comportamentos": ["Criativo", "Intuitivo", "Foco no futuro", "Distraido",
+      "Curioso", "Informal/Casual", "Flexivel"],
+  "pontosfortes": ["Provoca mudanças radicais", "antecipar o futuro", "Criatividade"],
+  "pontosmelhoria": ["Falta de atenção para o aqui e agora",
+    "Impaciência e rebeldia", "Defender o novo pelo novo"],
+  "motivacoes": ["Liberdade de expressão", "Ausência de controles rígidos",
+    "Ambiente de trabalho descentralizado", "Liberdade para fazer exceções",
+    "Oportunidade para delegar tarefas e detalhes"]
+}

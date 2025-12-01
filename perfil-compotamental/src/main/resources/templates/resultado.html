@@ -1,0 +1,123 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+	<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+	<!--===============================================================================================-->
+	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<!--===============================================================================================-->
+	<script th:src="@{/vendor/select2/select2.min.js}"></script>
+	<script th:src="@{/js/cep.js}"></script>
+	<!--===============================================================================================-->
+	<script th:src="@{/vendor/tilt/tilt.jquery.min.js}"></script>
+	<script >
+			$('.js-tilt').tilt({
+				scale: 1.1
+			})
+	</script>
+</head>
+
+<body>
+<div class="contact1">
+	<div class="container-contact1"
+		 style="display: flex; flex-direction: column; justify-content: center; align-items :center;">
+		<div>
+			<img 	th:src="${'/images/' + contextQuestionario.animais[0].fileName + '_640.jpg'}"
+				 	width="640" height="480" alt="IMG">
+		</div>
+
+		<form class="contact1-form validate-form"
+			  style="display: flex; flex-direction: column; justify-content: center; align-items :center; padding: 5em;">
+			<span class="contact1-form-title" th:if="${questionarioResposta}" style="margin-top: 5em;">
+				<strong
+						th:text="${'Olá ' + questionarioResposta.contato.nome}"></strong>
+				<!--#strings.toLowerCase(contextQuestionario.animalInfo.lema)-->
+			</span>
+			<div class="container-contact1-form-btn" style="margin-top: 5em;">
+				<p style="font-size: 1.5em;">Nós do curso de Recursos Humanos da Fatec Zona Leste, temos
+				grande satisfação em poder apresentar seu resultado do teste da análise de perfil comportamental</p>
+				<p style="font-size: 1.5em;">Com ele você terá conhecimento de seu perfil dominante que lhe
+				mostrará com mais clareza as suas ações e comportamentos dentro de um grupo ou
+				organização, seus pontos fortes e de melhorias, motivações que te movem, habilidades, que
+				auxiliarão a desenvolver atitudes assertivas e de sucesso em sua carreira profissional.</p>
+				<p style="font-size: 1.5em;">Saiba que o Lobo, a Águia, o Gato e o Tubarão fazem parte da sua vida e poderão trocar
+				de lugar quanto à dominância dependendo do momento em que você está vivendo, e conhecer
+				essas características te possibilitarão desenvolver seu autoconhecimento.</p>
+				<p style="font-size: 2em;">Então vamos lá, pois este é Você ... </p>
+			</div>
+			<div th:each="animal : ${contextQuestionario.animais}">
+				<div class="container-contact1-form-btn" style="margin-top: 5em;">
+					<span class="contact1-form-title" th:if="${animal}">
+						<strong th:text="${animal.titulo + ' ' + animal.porcentagemInteira + '%' }"></strong>
+					</span>
+				</div>
+				<p th:text="${'Frase-chave: ' + animal.lema + '.'}"></p>
+				<p th:each="descricao : ${animal.descricao}"
+				   th:text="${descricao}" style="font-size: 1.5em;"></p>
+			</div>
+			<div class="container-contact1-form-btn" style="margin-top: 5em;">
+				<span class="contact1-form-title" th:if="${contextQuestionario}">
+					<strong>Comportamentos</strong>
+				</span>
+			</div>
+			<p th:each="comportamento : ${contextQuestionario.animais[0].comportamentos}"
+					th:text="${comportamento}" style="font-size: 1.5em;"></p>
+			<div class="container-contact1-form-btn" style="margin-top: 5em;">
+				<span class="contact1-form-title" th:if="${contextQuestionario}">
+					<strong>Motivações</strong>
+				</span>
+			</div>
+			<p th:each="motivacao : ${contextQuestionario.animais[0].motivacoes}"
+					th:text="${motivacao}" style="font-size: 1.5em;"></p>
+			<div class="container-contact1-form-btn" style="margin-top: 5em;">
+				<span class="contact1-form-title" th:if="${contextQuestionario}">
+					<strong>Pontos Fortes</strong>
+				</span>
+			</div>
+			<p th:each="forte : ${contextQuestionario.animais[0].pontosfortes}"
+					th:text="${forte}" style="font-size: 1.5em;"></p>
+			<div class="container-contact1-form-btn" style="margin-top: 5em;">
+				<span class="contact1-form-title" th:if="${contextQuestionario}">
+					<strong>Pontos de Melhoria</strong>
+				</span>
+			</div>
+			<p th:each="melhoria : ${contextQuestionario.animais[0].pontosmelhoria}"
+					th:text="${melhoria}" style="font-size: 1.5em;"></p>
+
+			<div class="container-contact1-form-btn" style="margin-top: 5em;">
+				<span class="contact1-form-title" th:if="${contextQuestionario}">
+					<strong>Em breve você receberá em seu e-mail um e-book contendo os resultados detalhados do seu perfil comportamental. Agradecemos sua participação!</strong>
+				</span>
+			</div>
+			<div class="container-contact1-form-btn" style="margin-top: 5em;">
+				<span class="contact1-form-title" th:if="${contextQuestionario}">
+					<strong>Turma- 1° semestre curso Gestão de Recursos Humanos</strong>
+				</span>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!--===============================================================================================-->
+<script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

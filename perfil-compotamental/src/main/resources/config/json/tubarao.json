@@ -1,0 +1,25 @@
+{
+  "lema": "Fazer rápido",
+  "titulo": "Tubarão (Executor)",
+  "descricao": [
+    "Esse perfil tem como característica a proatividade, ou seja, possui um senso de urgência apurado e, por isso, ",
+    "gosta de resolver as tarefas com muita rapidez. ",
+    "Os indivíduos que integram esse perfil, costumam ter uma competência muito valorizada e foco em resultados.",
+    "Para alcançar uma meta, buscam encontrar caminhos mais práticos ",
+    "e não gostam de depender de outras pessoas para finalizar um projeto. ",
+    "Devido a sua autoconfiança, há uma enorme dificuldade em delegar tarefas. ",
+    "Outra peculiaridade desse tipo de perfil é a intolerância ao erro, ",
+    "pois o tubarão não suporta refazer uma atividade. Além disso, ",
+    "são ávidos por novos desafios e não gostam de tarefas repetitivas. ",
+    "São pessoas altamente competitivas e engajadas com os seus serviços. ",
+    "No entanto, uma desvantagem dessa personalidade é ",
+    "a facilidade de passar por cima de regras e de outras pessoas para alcançar o seu objetivo"
+  ],
+  "comportamentos": ["Senso de urgência", "Ação, iniciativa", "Impulsivo, prático", "Vencer desafios",
+  "Aqui e agora", "Auto suficiente", "Não gosta de delegar poder"],
+  "pontosfortes": ["Fazer que ocorra", "Parar com a burocracia", "Motivação"],
+  "pontosmelhoria": ["Socialmente um desastre", "Faz do modo mais fácil", "Relacionamento complicado"],
+  "motivacoes": ["Liberdade para agir individualmente", "Controle das próprias atividades",
+    "Resolver problemas do seu jeito", "Competição individual", "Variedade de atividades",
+    "Não ter que repetir tarefas"]
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="518" height="29" viewBox="0 0 518 29">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #394956;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="FAIXAS" class="cls-1" d="M163,254v3H681v-3H163Zm0,26H681v3H163v-3Z" transform="translate(-163 -254)"/>
+</svg>

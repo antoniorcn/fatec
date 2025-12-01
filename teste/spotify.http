@@ -1,0 +1,17 @@
+
+### Pegar o Token
+POST https://accounts.spotify.com/api/token?grant_type=client_credentials HTTP/1.1
+Authorization: Basic OWI0NWYzNjRiZDIwNGViMzk2NzIzMDk5Zjc1NGQ4ZDg6YzEwODY5ODM0MDhhNDkzZGIzNDEwYmYxZDMxNTRkOTE=
+Content-Type: application/x-www-form-urlencoded
+
+
+
+### Pegar o perfil do usuário
+GET https://api.spotify.com/v1/me HTTP/1.1
+Authorization:Bearer BQB5y4gKlqZmnQvY-DpGXtRmI2TPqb8mGbHNkWpalOhQIp9Rmq_4ykT-S_WsmAFY1KgKK5LMM39wSgsg6J1yL0K-BqRq6-xbha3Cl8cKx96fbrQc4io
+
+
+### Pegar Categoria
+GET https://api.spotify.com/v1/browse/categories/dinner HTTP/1.1
+Authorization:Bearer BQB5y4gKlqZmnQvY-DpGXtRmI2TPqb8mGbHNkWpalOhQIp9Rmq_4ykT-S_WsmAFY1KgKK5LMM39wSgsg6J1yL0K-BqRq6-xbha3Cl8cKx96fbrQc4io
+

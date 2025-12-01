@@ -1,0 +1,7 @@
+﻿6 3
+educacao 0.21 0.11 0.03
+matematica 0.05 0.35 0.27
+tecnologia 0.44 0.18 0.11
+software 0.40 0.22 0.09
+projeto 0.14 0.42 0.36
+gestao 0.18 0.39 0.31

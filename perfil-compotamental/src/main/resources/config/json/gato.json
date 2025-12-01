@@ -1,0 +1,22 @@
+{
+  "lema": "Fazer junto",
+  "titulo": "Gato (Comunicador)",
+  "descricao": [
+    "Os gatos são aqueles que gostam de outras pessoas. Eles se desenvolvem através de seus relacionamentos ",
+    "e preferem atividades em grupo.",
+    "São pessoas altamente sociáveis, sensíveis, que cultivam seus relacionamentos, adoram trabalhar em equipe, ",
+    "gostam de tradições e buscam harmonias nas relações.",
+    "Esse perfil comportamental pode ser observado em pessoas que tem muitos amigos ",
+    "e vários telefones na sua agenda (embora não saiba ao certo quem são grande parte deles).",
+    "São excelentes em resolver conflitos, harmonizar ambientes e integrar pessoas para uma causa. ",
+    "Em uma empresa são os gatos que abrem as comunicações e mantém sua cultura."
+  ],
+  "comportamentos": ["Sensível", "Relacionamentos", "Time", "Tradicionalistas", "Contribuição",
+  "Busca harmonia", "Delega autoridade"],
+  "pontosfortes": ["Manter comunicação harmoniosa", "Desenvolver e manter cultura empresarial",
+  "Comunicação aberta"],
+  "pontosmelhoria": ["Esconder conflitos", "Felicidade acima dos resultados",
+    "Manipulação através dos sentimentos"],
+  "motivacoes": ["Segurança", "Aceitação social", "Construir o consenso", "Reconhecimento da equipe",
+  "Supervisão compreensiva", "Ambiente harmônico", "Trabalho em grupo"]
+}

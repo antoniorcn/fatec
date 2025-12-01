@@ -1,0 +1,27 @@
+{
+  "lema": "Fazer Certo",
+  "titulo": "Lobo (Analista)",
+  "descricao": [
+    "Para os lobos existem duas formas de fazer as coisas: certo ou errado.",
+    "São pessoas extremamente organizadas que preferem as rotinas e valorizam a ordem e o controle. ",
+    "Algumas vezes, pode ser que prefiram trabalhar sozinhos.",
+    "Pessoas com esse perfil são aquelas que tem várias pastas em cima de sua mesa, ",
+    "seu computador é perfeitamente organizado, faz check-lists para tudo, adora escrever listas, ",
+    "faz planejamentos e se precisar de algo na praia, ",
+    "que todo mundo esqueceu pode apostar que o lobo trouxe (por via das dúvidas).",
+    "Gostam de detalhes para compreender uma situação, preferem ambientes previsíveis, sem margem para improvisos.",
+    "Essas pessoas apresentam alta lealdade e transmitem segurança em seus compromissos. ",
+    "Compreendem, seguem muito bem as regras e sabem de suas responsabilidades, ",
+    "buscam conhecimento antes de tomar decisões.",
+    "Para vender para um lobo é preciso explicar em detalhes o produto ou serviço ",
+    "e caso ele peça o manual de instrução, provavelmente irá ler."
+  ],
+  "comportamentos": ["Detalhista", "Organizado", "Estrategista", "Busca de conhecimento", "Pontual",
+  "Conservador", "Previsível"],
+  "pontosfortes": ["Passado, Presente e Futuro", "Consistência, conformidade e qualidade",
+  "Lealdade e segurança", "Regras e responsabilidades"],
+  "pontosmelhoria": ["Dificuldade de se adaptar às mudanças", "Pode impedir o progresso",
+  "Detalhista, estruturado e demasiadamente sistematizado"],
+  "motivacoes": ["Certeza, compreensão exata de quais são as regras", "Conhecimento específico do trabalho",
+  "Ausência de riscos e erros", "Ver o produto acabado - começo, meio e fim"]
+}

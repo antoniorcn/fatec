@@ -1,0 +1,471 @@
+
+
+/*----------------------------------------------
+  ------------------- GERAL --------------------
+  ----------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
+body {
+   margin: 0;
+   padding: 0;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-image:linear-gradient(to right,#b3b4b5 0%, #e8eaeb 50%, #b3b4b5 100%);
+   z-index: 0;
+   overflow-x: hidden; 
+}
+
+.background{
+   background-image: url("../imagens/vetor.png");
+   background-size: 60px;
+   width: 100vw;
+   height: 100vh;
+   opacity: 0.12;
+   position: absolute;
+   top:0px;
+   left:0px;
+   z-index: -1;
+}
+
+
+/*----------------------------------------------
+  ----------  SVG- LOGO FATEC - ZL  ------------
+  ----------------------------------------------*/
+
+.conteiner-svg{
+   margin: 0 auto;
+    width: 600px;
+    height: 150px;
+}
+
+.svg_logo_parte_01{
+   fill:none;
+   height: 75%;
+   stroke: #394956;
+   stroke-width: 3px;
+   stroke-dasharray: 1128;
+   stroke-dashoffset: 0;
+   animation: 9.9s borda_parte_01 ease-in-out infinite alternate;
+   position: relative;
+   top: 10px;
+   left: 48px;
+}
+
+.svg_logo_parte_02{
+    fill:none;
+    height: 75%;
+    stroke: #af0101;
+    stroke-width: 3px;
+    stroke-dasharray: 645;
+    stroke-dashoffset: 0;
+    animation: 9.9s borda_parte_02 ease-in-out infinite alternate;
+    position: relative;
+    top:35px;
+    left: -115px;
+ }
+
+.svg_logo_parte_03{
+    fill:#394956;
+    height: 35%;
+    position: relative;
+    top: -42px;
+    left: 120px;
+    animation: 10s borda_parte_03 ease-in-out infinite alternate;
+ }
+
+.svg_logo_parte_04{
+    fill:#af0101;
+    height: 35%;
+    position: relative;
+    top: -42px;
+    left: 52px;
+    animation: 10s borda_parte_04 ease-in-out infinite alternate;
+ }
+
+.svg_logo_parte_05{
+    fill:#394956;
+    height: 12.2%;
+    position: relative;
+    top:-42px;
+    left: 79px;
+    animation: 10s borda_parte_03 ease-in-out infinite alternate;
+ }
+
+.svg_logo_parte_06{
+    fill:#394956;
+    height: 6.2%;
+    position: relative;
+    top:-64px;
+    left: 97px;
+    animation: 10s borda_parte_03 ease-in-out infinite alternate;
+ }
+
+.cls-1{
+   fill-rule: evenodd;
+}
+
+
+/*----------------------------------------------
+  ---------------- SVG- ANIMAÇÃO ---------------
+  ----------------------------------------------*/
+
+  @keyframes borda_parte_01 {
+   0%{
+       fill: none; 
+       stroke-dashoffset: 1128;
+    }
+   50%{
+       fill: #39495600;
+    }
+   80%{
+       stroke-dashoffset: 0;
+       fill: #394956;
+    }
+   100%{
+       stroke-dashoffset: 0;
+       fill: #394956;
+    }
+}
+
+@keyframes borda_parte_02 {
+    0%{
+        fill: none; 
+        stroke-dashoffset: 645;
+     }
+    50%{
+        fill: #af010100;
+     }
+    80%{
+        stroke-dashoffset: 0;
+        fill: #af0101;
+     }
+    100%{
+        stroke-dashoffset: 0;
+        fill: #af0101;
+     }
+ }
+
+ @keyframes borda_parte_03 {
+    0%{
+        fill: none; 
+     }
+    30%{
+        fill: #39495600;
+     }
+    99%{
+        fill: #394956;
+     }
+     100%{
+        fill: #394956;
+     }
+ }
+
+ @keyframes borda_parte_04 {
+    0%{
+        fill: none; 
+     }
+    30%{
+        fill: #af010100;
+     }
+    99%{
+        fill: #af0101;
+     }
+    100%{
+        fill: #af0101;
+     }
+ }
+
+
+/*----------------------------------------------
+  -------------------- LOGOS -------------------
+  ----------------------------------------------*/
+
+ .conteiner-logos{
+   width: 407px;
+   height: 100px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.logos{
+   width: 100%;
+}
+
+
+/*----------------------------------------------
+  ------------- CONTEINER - QR-CODE ------------
+  ----------------------------------------------*/
+
+.conteiner-qr-codes{
+   margin-top: 25px;
+   max-width: 549px;
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+}
+
+.qr-code{
+   width: 33.33%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.qr-code-a{
+   fill: #394956;
+   width: 90%;
+   height: 90%;
+}
+
+.qr-code-a:hover{
+   fill: #990e0ec0;
+   width: 95%;
+   height: 95%;
+   transition: 0.6s;
+}
+
+p{
+  margin: 0;
+  padding: 0;
+}
+
+.titulo{
+  font-family: 'Fugaz One', cursive;
+  font-size: 12px;
+  color:#af0101;
+  text-align: center;
+  line-height: 14px;
+  margin-bottom: 5px;
+}
+
+.titulo:hover{
+  font-size: 14px;
+  transition: 0.6s;
+}
+
+.titulo-lista{
+  font-family: 'Fugaz One', cursive;
+  font-size: 14px;
+  color:#af0101;
+  margin: 10px 0px -10px 0px;
+}
+
+.titulo-data{
+  font-family: 'Fugaz One', cursive;
+  font-size: 12px;
+  color:#af0101;
+  text-align: center;
+}
+
+a{
+  margin:0;
+  padding:0;
+  text-align: center;
+  text-decoration: none;
+}
+
+.conteiner-descricao{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.descricao{
+  width: 90%;
+  text-align: justify;
+}
+
+strong{
+  font-size: 12px;
+  color:#000000;
+}
+
+.destaque{
+  text-align: center;
+  font-weight: bold;
+}
+
+ul{
+  padding-left: 16px;
+  text-align: left;
+}
+
+li{
+  line-height: 20px;
+  text-align: left;
+}
+
+.cursos{
+  color:#000000;
+}
+
+.cursos:hover{
+  color: #af0101;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.cursos li{
+   padding-bottom: 4px;
+}
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------
+  -------------- REAPONSIVIDADE ----------------
+  ----------------------------------------------*/
+
+@media (max-width: 600px){
+
+   /*----- GERAL -----*/
+
+   body {
+      background:white;
+  }
+   .conteiner-svg{
+      width: 320px;
+  }
+
+  /*----- SVG- LOGO FATEC - ZL -----*/
+
+  .svg_logo_parte_01{
+      height: 65%;
+      top: 25px;
+      left: -40px;
+   }
+
+   .svg_logo_parte_02{
+      height: 65%;
+      top:-60px;
+      left: -15px;
+   }
+
+   .svg_logo_parte_03{
+      height: 25%;
+      top: -120px;
+      left: -5px;
+   }
+
+   .svg_logo_parte_04{
+      height: 25%;
+      top: -161px;
+      left: 220px;
+    }
+
+   .svg_logo_parte_05{
+      height: 8.8%;
+      top:-161px;
+      left: -59px;
+   }
+
+   .svg_logo_parte_06{
+      height: 4.5%;
+      top:-182px;
+      left: -40px;
+   }
+
+   /*----- LOGOS -----*/
+
+   .conteiner-logos{
+      width: 320px;
+      height: 65px;
+   }
+
+   /*----- CONTEINER - QR-CODE -----*/
+
+   .conteiner-qr-codes{
+      max-width: 320px;
+      flex-direction: column;
+   }
+
+   .qr-code{
+      width: 100%;
+      border: solid 2px #394956;
+      border-radius: 10px 10px 25px 25px;
+      margin-bottom: 10px;
+      background: #f4f4f5e5;
+   }
+
+   .qr-code-a{
+      width: 80%;
+      height: 80%;
+   }
+
+   .qr-code-a:hover{
+      fill: #000000;
+      width: 85%;
+      height: 85%;
+   }
+
+   .titulo{
+      font-size: 17px;
+      line-height: 24px;
+      margin-bottom: 0px;
+   }
+
+   .titulo:hover{
+      font-size: 20px;
+   }
+
+   .conteiner-descricao{
+      background: #394956;
+      border-radius: 0px 0px 20px 20px;
+      padding-top:25px;
+      color:#d4d5d6;
+   }
+
+   .descricao{
+      width: 90%;
+      text-align: center;
+      font-size: 20px;
+      margin: 0px;
+   }
+
+   .titulo-data{
+      font-size: 17px;
+      margin-top: -20px;
+      margin-bottom: 5px;
+      color:#ffffff;
+   }
+
+   .titulo-lista{
+      color:#ffffff;
+    }
+
+   strong {
+      color: #d4d5d6;
+   }
+
+   .horario{
+      list-style-type:none;
+   }
+
+   .horario li{
+      text-align: center;
+   }
+
+   .cursos{
+      color:#d4d5d6;
+   }
+
+   .cursos:hover{
+      color: #1c2024;
+      font-size: 22px;
+   }
+
+}
+
+
+
+
+
