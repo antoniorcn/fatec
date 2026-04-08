@@ -1,42 +1,40 @@
 from selenium.webdriver import Keys
-from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver import ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from utils import tag_map, aluno_disciplina_field_map
 import mysql.connector
 import time
-import os
 
 class ChromeController:
-    def __init__(self, db_user, db_password, db_host, db_database):
+    def __init__(self, db_user, db_password, db_host, db_database, time_factor = 1):
         self.DB_USER = db_user
         self.DB_PASSWORD = db_password
         self.DB_HOST = db_host
         self.DB_DATABASE = db_database
-        self.cdm = ChromeDriverManager().install()
-        folder = os.path.dirname(self.cdm)
-        chromedriver_path = os.path.join(folder, "chromedriver.exe")
-        self.service = ChromeService(chromedriver_path)
+        # Selenium Manager (built-in) resolves and downloads a compatible driver.
+        self.service = ChromeService()
         self.options = webdriver.ChromeOptions()
         self.browser = webdriver.Chrome(service=self.service, options=self.options)
         self.current_element = None
-        print(self.cdm)
+        self.time_factor = time_factor
+
+    def delay(self, time_frames):
+        time.sleep(self.time_factor * time_frames) 
 
     def switch_to_default_content(self):
         self.browser.switch_to.default_content()
-        time.sleep(2)
+        self.delay(2)
 
     def switch_to_frame(self, frame_info, by=By.NAME):
         frame = self.retrieve_element(by=by, locator=frame_info)
         self.browser.switch_to.frame(frame)
-        time.sleep(2)
+        self.delay(2)
 
     def click_link(self, locator, by=By.ID):
         self.retrieve_element(by=by, locator=locator).click()
-        time.sleep(5)
+        self.delay(5)
 
     def retrieve_element(self, locator, by=By.ID, origin_element=None):
         if origin_element is None:
@@ -59,7 +57,7 @@ class ChromeController:
         element = Select(self.retrieve_element(by=by, locator=locator,
                                                origin_element=origin_element))
         element.select_by_value(str(value))
-        time.sleep(5)
+        self.delay(5)
 
     def select_option_typing_by_value(self, locator, text_value, by=By.ID, 
                                       origin_element=None):
@@ -68,23 +66,35 @@ class ChromeController:
         element.click()
         element.send_keys(text_value)
         element.send_keys(Keys.ENTER)
-        time.sleep(5)
+        self.delay(5)
 
     def select_option_by_visible_text(self, locator, text_value, by=By.ID, 
                                       origin_element=None):
         element = Select(self.retrieve_element(by=by, locator=locator, 
                                                origin_element=origin_element))
         element.select_by_visible_text(text_value)
-        time.sleep(5)
+        self.delay(5)
+
+    def exist_element(self, locator, by=By.ID, 
+                      origin_element=None):
+        try:
+            elemento = self.retrieve_element(by=by, locator=locator,
+                                             origin_element=origin_element)
+            print("Elemento: ", elemento)
+            return elemento is not None
+        except Exception as e:
+            print(f"elemento {locator} não foi encontrado")
+            return False
 
     def check_element(self, locator, text_value, by=By.ID, 
                       origin_element=None):
         try:
             elemento = self.retrieve_element(by=by, locator=locator,
                                              origin_element=origin_element)
+            print("Elemento: ", elemento)
             return text_value.strip() == elemento.get_attribute("innerText").strip()
         except Exception as e:
-            print(f"elemento {locator} não contém o valor {text_value}")
+            print(f"elemento {locator} não contém o valor ({text_value})")
             return False
         
     def select_table_row_by_locator(self, locator, text_value, by=By.ID, origin_element=None):
@@ -99,16 +109,16 @@ class ChromeController:
             cmItemMouseUp(temp_menu_option, 0, null, 0, {sub_menu_number});
         """
         self.browser.execute_script(script)
-        time.sleep(5)
+        self.delay(5)
 
     def click(self):
         if self.current_element is not None:
             self.current_element.click()
-            time.sleep(2)
+            self.delay(2)
 
     def get_page_source(self):
         html = self.browser.page_source
-        time.sleep(2)
+        self.delay(2)
         # print(html)
         return html
     
@@ -124,41 +134,64 @@ class ChromeController:
         self.browser.maximize_window()
         window = self.browser.current_window_handle
         print("Window: ", window)
-        time.sleep(5)
+        self.delay(5)
 
         self.browser.find_element(By.XPATH, "//input[@id='vSIS_USUARIOID']").send_keys(user)
         self.browser.find_element(By.ID, "vSIS_USUARIOSENHA").send_keys(password)
         self.browser.find_element(By.NAME, "BTCONFIRMA").click()
-        time.sleep(5)            
+        self.delay(5)            
     
-    def choose_campus(self):
-        print("Escolhendo o Campus")
+    def choose_campus(self, unidade="", modulo="", grupo=""):
+        print(f"Procurando Unidade: {unidade}\tModulo: {modulo}\tGrupo: {grupo}")
         if not self.is_in_students_directory():
-            faculdades = self.browser.retrieve_elements(By.XPATH, "//table[@id='Grid1ContainerTbl']/tbody/tr")
+            faculdades = self.retrieve_elements("//table[@id='Grid1ContainerTbl']/tbody/tr", By.XPATH)
             for idx, faculdade in enumerate(faculdades):
-                print("ID: ", idx,   "Tag : ", faculdade.tag_name)
-                if idx == 1:
-                    faculdade.click()
+                tds = faculdade.find_elements(By.XPATH, "./td")
+                valores = []
+                link_id = None
+                link_sp = None
+                for td in tds:
+                    spans = td.find_elements(By.XPATH, "./span")
+                    for sp in spans:
+                        texto = sp.text.strip()
+                        if texto:
+                            valores.append(texto)
+                            if texto.lower() == "abrir":
+                                link_id = sp.get_attribute("id")
+                                link_sp = sp
+
+                print("ID: ", idx,   "Valores : ", valores)
+                if len(valores) > 3 and unidade in valores[0] and \
+                    modulo in valores[2] and grupo in valores[3] and link_id is not None:
+                    print("Encontrado a unidade, modulo e grupo desejados. Clicando para acessar.")
+                    print("Link TD: ", link_id)
+                    print("Link SP: ", link_sp)
+                    self.click_link(link_id)
+                    self.delay(10) 
                     break
-            self.click_link("span_vBT_ABRIR_0001")
-            self.switch_to_frame("sistema")
-            self.get_page_source()
-            self.click_menu("//*[@id='cmSubMenuID4Table']/tbody/tr[1]", sub_menu_number=13)
-        return self.is_in_students_directory()
+            # self.click_link("span_vBT_ABRIR_0001")
+            # self.switch_to_frame("sistema")
+            # self.get_page_source()
+            # self.click_menu("//*[@id='cmSubMenuID4Table']/tbody/tr[1]", sub_menu_number=13)
 
     def move_to_students_directory(self):
         print("Acessando cadastro de estudantes")
         if not self.is_in_students_directory():
-            self.click_link("span_vBT_ABRIR_0001")
-            self.switch_to_frame("sistema")
-            self.get_page_source()
-            self.click_menu("//*[@id='cmSubMenuID4Table']/tbody/tr[1]", sub_menu_number=13)
+            self.click_menu("//table[@id='cmSubMenuID4Table']/tbody//tr[td[contains(text(),'Catálogo de Alunos da Unidade')]][1]", sub_menu_number=13)
+            self.delay(5) 
         return self.is_in_students_directory()
     
     def is_in_students_directory(self):
         is_in = self.check_element("TITULO_MPAGE", "Catálogo de Alunos da Unidade")
         print(f"Está no diretório de estudantes: {is_in}")
         return is_in
+    
+    def is_in_main_directory(self):
+        user_info = self.retrieve_element(by=By.XPATH, locator='//*[@id="MPW0014SESSIONSTRING"]/span')
+        print("User info: ", user_info)
+        is_in = user_info is not None and user_info.text.strip() != ""
+        print(f"Está no diretório principal: {is_in}")
+        return is_in    
     
     def pontuation_text_extraction( self, texto, *labels ):
         lista = []
@@ -257,9 +290,9 @@ class ChromeController:
         print(f"Historico de disciplinas: {history}")
         return (student_detail, history)
 
-    def retrieve_student_list(self, curso, turno):
+    def retrieve_current_students(self, curso, turno):
         print(f"Buscando lista de estudantes no curso:{curso} no turno:{turno}")
-        if self.move_to_students_directory():
+        if self.is_in_students_directory():
             return self.retrieve_elements("//*[@id='Grid1ContainerTbl']/tbody/tr")
         else:
             return None
@@ -320,15 +353,18 @@ class ChromeController:
         return execute, sql_insert
     
     def retrieve_students_list(self, curso, turno, situacao):
-        if self.move_to_students_directory():
+        if self.is_in_students_directory():
             print("Cadastro de estudantes acessado")
             print("Conectando no banco de dados")
             cnx = mysql.connector.connect(user=self.DB_USER, password=self.DB_PASSWORD,
                                     host=self.DB_HOST,
                                     database=self.DB_DATABASE)
             self.set_curso_turno_filter(curso, turno, situacao)
-            elementos = self.retrieve_student_list(curso, turno)
+            self.delay(50)
+            elementos = self.retrieve_current_students(curso, turno)
+            self.delay(5)
             if elementos is not None:
+                print(f"Foram encontrados: {len(elementos)} estudantes")
                 for idx, elemento in enumerate(elementos):
                     if idx == 0:
                         continue
@@ -339,12 +375,14 @@ class ChromeController:
                         cursor = cnx.cursor()
                         cursor.execute(sql_insert)
                         cnx.commit()
+            else:
+                print("Nenhum estudante encontrado para o curso e turno selecionados.")
                 
             cnx.close()
 
 
     def retrieve_students_details(self, curso, turno, situacao):
-        if self.move_to_students_directory():
+        if self.is_in_students_directory():
             print("Recuperar detalhes de alunos do SIGA")
             print("Conectando no banco de dados")
             cnx = mysql.connector.connect(user=self.DB_USER, password=self.DB_PASSWORD,
@@ -361,7 +399,7 @@ class ChromeController:
                 print(f"Buscando dados do aluno RA {ra}")
                 self.set_curso_turno_filter(curso, turno, situacao)
                 student_detail, student_history = self.retrieve_student_detail( ra )
-                time.sleep(5)
+                self.delay(5)
                 print(f"Salvando os dados no DB")
                 for disciplina in student_history:
                     self.save_class_data(cnx, disciplina)

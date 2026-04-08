@@ -1,11 +1,13 @@
 # Como usar o Siga Spider
 
 
-# Instalando o Chrome Driver
+# Chrome Driver (automatico)
 
 Verifique a versão do seu Google Chrome, clicando em 
     Menu -> Ajuda -> Sobre o Google Chrome
 
-Acesse o link ==> https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json
+Com Selenium 4, o Selenium Manager baixa e configura automaticamente
+um ChromeDriver compatível com a versão instalada do Chrome.
 
-Baixe o Chrome-Driver correspondente a versão do seu Google Chrome
+Nao e necessario baixar manualmente do link:
+https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json
