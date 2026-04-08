@@ -3,27 +3,8 @@ import time
 
 import os
 from login import MainScreen
-# import getch
-
-
-# if "SPIDER_SIGA_USER" not in os.environ:
-#     print("Digite seu usuario do SIGA: ")
-#     SIGA_USER = input()
-
-# if "SPIDER_SIGA_PASSWORD" not in os.environ:
-#     print("Digite sua senha no SIGA:")
-#     SIGA_PASSWORD = input()
-
-# def getPass():
-#     passwor = ''
-#     while True:
-#         x = getch.getch()
-#         # x = msvcrt.getch().decode("utf-8")
-#         if x == '\r' or x == '\n':
-#             break
-#         print('*', end='', flush=True)
-#         passwor +=x
-#     return passwor
+from controllers import ChromeController
+from dotenv import load_dotenv
 
 
 def print_hierarchical_elements(root):
@@ -33,24 +14,56 @@ def print_hierarchical_elements(root):
             print(f"Element[{element.text}]")
             print_hierarchical_elements(element)
 
+
 def stop_until_enter():
     input("Pressione enter para continuar")
 
 
-def verify_credentials(user, password, course, instance):
-        global SIGA_USER, SIGA_PASSWORD
-        SIGA_USER = user
-        SIGA_PASSWORD = password
-        print(f'User: {user}')
-        print(f'Pass: {"*" * len(password)}')
-        print(f'Course: {course}')
-        executa_extracao()
+class Principal:
+    def __init__(self):
+        load_dotenv(dotenv_path="./production.env")
+        self.SPIDER_SIGA_USER = os.getenv("SPIDER_SIGA_USER")
+        self.SPIDER_SIGA_PASSWORD = os.getenv("SPIDER_SIGA_PASSWORD")
+        self.SPIDER_SIGA_CURSO = os.getenv("SPIDER_SIGA_CURSO")
+        self.SPIDER_SIGA_TURNO = os.getenv("SPIDER_SIGA_TURNO")
+        self.SPIDER_DB_HOST = os.getenv("SPIDER_DB_HOST")
+        self.SPIDER_DB_DATABASE = os.getenv("SPIDER_DB_DATABASE")
+        self.SPIDER_DB_USER = os.getenv("SPIDER_DB_USER")
+        self.SPIDER_DB_PASSWORD = os.getenv("SPIDER_DB_PASSWORD")
 
-def executa_extracao():    
-    print("Efetuando o login")
-    print("Login concluido")
 
-    # retrieve_students_list(controller, "D.S.M.", "Manhã")
+    def verify_credentials(self):
+        if self.SPIDER_SIGA_USER and self.SPIDER_SIGA_PASSWORD and\
+            self.SPIDER_SIGA_CURSO and self.SPIDER_SIGA_TURNO:
+            print(f'User: {self.SPIDER_SIGA_USER}')
+            print(f'Pass: {"*" * len(self.SPIDER_SIGA_PASSWORD)}')
+            print(f'Course: {self.SPIDER_SIGA_CURSO}')
+        else:
+            print("Credenciais não encontradas. Verifique o arquivo de ambiente.")
+            print("abrindo interface de login")
+            MainScreen().run()
+
+    def executar_extracao(self):    
+        print("Efetuando o login")
+        print("Login concluido")
+        # retrieve_students_list(controller, "D.S.M.", "Manhã")
+
+    def connect(self):
+        self.controller = ChromeController(db_user=self.SPIDER_DB_USER, db_password=self.SPIDER_DB_PASSWORD, 
+                                        db_host=self.SPIDER_DB_HOST, db_database=self.SPIDER_DB_DATABASE)
+        
+    def close(self):
+        self.controller.close()
+
+    def efetuar_login(self):
+        self.controller.login(self.username.text, self.password.text)
+        self.controller.retrieve_students_details(self.SPIDER_SIGA_CURSO, self.SPIDER_SIGA_TURNO, "Todos")
 
 if __name__ == '__main__':
-    MainScreen().run()
+    principal = Principal()
+    principal.verify_credentials()
+    principal.connect()
+    principal.efetuar_login()
+    principal.close()
+    
+    

@@ -2,3 +2,4 @@ selenium==4.17.2
 webdriver_manager==3.9.1
 mysql-connector-python
 kivy[full]
+python-dotenv

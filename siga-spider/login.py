@@ -4,24 +4,28 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.spinner import Spinner
-from controllers import ChromeController
-from dotenv import load_dotenv
-import os
 
-load_dotenv(dotenv_path="./production.env")
-SIGA_USER = os.getenv("SPIDER_SIGA_USER")
-SIGA_PASSWORD = os.getenv("SPIDER_SIGA_PASSWORD")
-
-DB_HOST = os.getenv("SPIDER_DB_HOST")
-DB_DATABASE = os.getenv("SPIDER_DB_DATABASE")
-DB_USER = os.getenv("SPIDER_DB_USER")
-DB_PASSWORD = os.getenv("SPIDER_DB_PASSWORD")
 
 class MainScreen(App):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         print("Carregando o controlador para o Google Chrome")
         self.controller = None
+        self.siga_user = None
+        self.siga_password = None
+        self.siga_curso = None
+        self.siga_turno = None
+
+    def capture_info(self, instance=None):
+        self.siga_user = self.username.text
+        self.siga_password = self.password.text
+        self.siga_curso = self.course.text
+        self.siga_turno = self.turno.text
+        print(f'User: {self.siga_user}')
+        print(f'Pass: {"*" * len(self.siga_password)}')
+        print(f'Course: {self.siga_curso}')
+        print(f'Turno: {self.siga_turno}')
+
     
     def build(self):
         container = BoxLayout()
@@ -44,16 +48,16 @@ class MainScreen(App):
         )
         container.add_widget(self.course)
 
+        container.add_widget(Label(text='Turno'))
+        self.turno = Spinner(
+            text='Selecione o curso',
+            values=('Manha', 'Tarde', 'Noite'),
+            size_hint=(None, None),
+            size=(200, 44)
+        )
+        container.add_widget(self.turno)
+
         self.login_button = Button(text='Login', size_hint=(None, None), size=(200, 44))
-        self.login_button.bind(on_press=self.efetuar_login)
+        self.login_button.bind(on_press=self.capture_info)
         container.add_widget(self.login_button)
         return container
-
-    def efetuar_login(self, instance=None):
-        print(f'User: {self.username.text}')
-        print(f'Pass: {"*" * len(self.password.text)}')
-        print(f'Course: {self.course}')
-        self.controller = ChromeController(db_user=DB_USER, db_password=DB_PASSWORD, db_host=DB_HOST, db_database=DB_DATABASE)
-        self.controller.login(self.username.text, self.password.text)
-        self.controller.retrieve_students_details("D.S.M.", "Manhã", "Todos")
-        self.controller.close()
